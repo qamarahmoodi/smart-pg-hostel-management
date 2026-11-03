@@ -13,8 +13,8 @@
 
 | Student Name | Student Registration Number (SRN) | Role / Contributions |
 | :--- | :--- | :--- |
-| `[Student 1 Full Name]` | `[Student 1 SRN / Roll Number]` | Architecture, MySQL Relational Database, Next.js Portals, APIs, Auth |
-| `[Student 2 Full Name]` | `[Student 2 SRN / Roll Number]` | MongoDB Activity Logging Aggregations & Activity Log Admin Viewer |
+| `Qamar Ahmed` | `PES2UG24CS904` | Architecture, MySQL Relational Database, Next.js Portals, APIs, Auth |
+| `Ibrahim Khaleel` | `PES2UG25809` | MongoDB Activity Logging Aggregations & Activity Log Admin Viewer |
 
 ---
 
