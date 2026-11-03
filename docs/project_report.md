@@ -14,7 +14,7 @@
 | Student Name | Student Registration Number (SRN) | Role / Contributions |
 | :--- | :--- | :--- |
 | `Qamar Ahmed` | `PES2UG24CS904` | Architecture, MySQL Relational Database, Next.js Portals, APIs, Auth |
-| `Ibrahim Khaleel` | `PES2UG25809` | MongoDB Activity Logging Aggregations & Activity Log Admin Viewer |
+| `Ibrahim Khaleel` | `PES2UG25CS809` | MongoDB Activity Logging Aggregations & Activity Log Admin Viewer |
 
 ---
 
