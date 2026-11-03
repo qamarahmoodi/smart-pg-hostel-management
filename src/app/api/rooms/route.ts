@@ -13,6 +13,7 @@ export async function GET(request: Request) {
     const hostelId = searchParams.get('hostel_id');
     const roomTypeId = searchParams.get('room_type_id');
     const occupancyStatus = searchParams.get('occupancy_status'); // 'AVAILABLE', 'FULL', 'UNDER_MAINTENANCE'
+    const availableOnly = searchParams.get('available_only');
     const floor = searchParams.get('floor');
     const maxRent = searchParams.get('max_rent');
 
@@ -29,7 +30,9 @@ export async function GET(request: Request) {
       params.push(parseInt(roomTypeId, 10));
     }
 
-    if (occupancyStatus) {
+    if (availableOnly === 'true' || availableOnly === '1') {
+      conditions.push("occupancy_status = 'AVAILABLE'");
+    } else if (occupancyStatus) {
       conditions.push('occupancy_status = ?');
       params.push(occupancyStatus.toUpperCase());
     }

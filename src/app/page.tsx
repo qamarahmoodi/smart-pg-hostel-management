@@ -60,8 +60,26 @@ export default function Home() {
             href="/login"
             className="inline-flex items-center gap-2 px-6 py-3 text-base font-medium rounded-lg text-slate-700 bg-white border border-slate-300 hover:bg-slate-50 shadow-sm transition"
           >
-            Administrator Login
+            Sign In / Demo Portal
           </Link>
+        </div>
+
+        {/* Demo Credentials Box */}
+        <div className="mt-8 p-4 bg-slate-50 border border-slate-200 rounded-xl max-w-xl text-left text-xs text-slate-600 shadow-xs">
+          <div className="font-semibold text-slate-900 mb-2 flex items-center justify-between">
+            <span>⚡ Demonstration & Evaluator Accounts (Password: <code className="bg-slate-200 px-1 py-0.5 rounded text-indigo-700 font-mono">Password@123</code>):</span>
+            <span className="text-[10px] bg-indigo-100 text-indigo-700 font-medium px-2 py-0.5 rounded-full">Pre-Seeded</span>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <div className="p-2.5 bg-white rounded-lg border border-slate-200">
+              <span className="font-semibold text-slate-800 block">Warden / Admin:</span>
+              <span className="font-mono text-indigo-600 select-all">admin@smartpg.com</span>
+            </div>
+            <div className="p-2.5 bg-white rounded-lg border border-slate-200">
+              <span className="font-semibold text-slate-800 block">Student Demo:</span>
+              <span className="font-mono text-emerald-600 select-all">rohan.gupta@example.com</span>
+            </div>
+          </div>
         </div>
 
         {/* Feature Cards Grid */}

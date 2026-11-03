@@ -66,8 +66,8 @@ interface AvailableRoom {
   room_type_id: number;
   type_name: string;
   capacity: number;
-  occupied_places: number;
-  available_places: number;
+  occupied_beds: number;
+  available_beds: number;
   monthly_rent: number;
 }
 
@@ -524,7 +524,7 @@ function AllocationsContent() {
 
                   return (
                     <option key={room.room_id} value={room.room_id}>
-                      {isMatch ? '★ [MATCH] ' : ''}Room {room.room_number} ({room.hostel_name} • {room.type_name} • {room.available_places} place(s) left)
+                      {isMatch ? '★ [MATCH] ' : ''}Room {room.room_number} ({room.hostel_name} • {room.type_name} • {room.available_beds} bed(s) vacant)
                     </option>
                   );
                 })}
