@@ -74,4 +74,6 @@ export interface RoomOccupancySummary {
   occupied_beds: number;
   available_beds: number;
   status: RoomStatus;
+  occupancy_status?: string;
+  physical_status?: RoomStatus;
 }
