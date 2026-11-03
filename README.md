@@ -19,6 +19,24 @@ This system solves these issues through a **polyglot database approach**:
 
 ---
 
+## 🎯 Objectives
+
+1. **Eliminate Over-Allocation:** Guarantee that room allocations never exceed the defined bed capacity through database-level pessimistic locking (`SELECT ... FOR UPDATE`), transactions, and triggers.
+2. **Transparent Vacancy Tracking:** Provide live room availability via the `room_occupancy_summary` view without maintaining fragile, redundant counters.
+3. **Auditability & Observability:** Automatically record critical state transitions in MongoDB Atlas (`activity_logs`) without coupling high-frequency logging to relational transaction locks.
+4. **Role-Based Access Control (RBAC):** Deliver dedicated, role-guarded portals for students and wardens with signed HTTP-only JWT session cookies.
+
+---
+
+## ⚖️ Database Choices & Justification
+
+| Database Engine | Primary Role | Key Justification |
+| :--- | :--- | :--- |
+| **MySQL 8.0+ (InnoDB)** | Relational Transactional Store | Enforces strict ACID compliance, relational integrity (foreign keys, check constraints), row-level exclusive locks (`SELECT ... FOR UPDATE`), and triggers for physical capacity enforcement. |
+| **MongoDB Atlas Cloud** | Audit & Activity Event Store | High-throughput, schemaless document ingestion decoupled from MySQL. Enables rich metadata payloads per action and analytical aggregation pipelines (`$group`, `$sort`) without schema migrations. |
+
+---
+
 ## 🧰 Tech Stack
 
 - **Frontend & APIs:** Next.js 14 (App Router, Server Components & Route Handlers)
@@ -56,6 +74,12 @@ smart-pg-hostel-management/
 │   ├── procedures.sql           # Atomic room allocation stored procedure
 │   ├── seed.sql                 # Demonstration seed data
 │   └── demo_queries.sql         # Viva demonstration SQL queries
+├── docs/                        # Architectural diagrams & academic report
+│   ├── erd.drawio               # Entity-Relationship diagram (diagrams.net)
+│   ├── relational_schema.drawio # Relational schema with PK/FK links
+│   ├── architecture.drawio      # Full-stack polyglot system architecture
+│   ├── data_dictionary.md       # Comprehensive database data dictionary
+│   └── project_report.md        # Formatted academic project report
 ├── .env.example                 # Environment variable templates
 ├── AGENTS.md                    # Project guidelines & conventions
 ├── PROJECT_SPEC.md              # Detailed project specifications
