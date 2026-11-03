@@ -8,6 +8,7 @@ interface EmptyStateProps {
   description: string;
   actionHref?: string;
   actionLabel?: string;
+  actionOnClick?: () => void;
 }
 
 export function EmptyState({
@@ -16,6 +17,7 @@ export function EmptyState({
   description,
   actionHref,
   actionLabel,
+  actionOnClick,
 }: EmptyStateProps) {
   return (
     <div className="flex flex-col items-center justify-center p-8 sm:p-12 text-center bg-white border border-dashed border-slate-300 rounded-xl">
@@ -31,6 +33,15 @@ export function EmptyState({
         >
           {actionLabel}
         </Link>
+      )}
+      {!actionHref && actionOnClick && actionLabel && (
+        <button
+          type="button"
+          onClick={actionOnClick}
+          className="mt-5 inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg shadow-sm transition"
+        >
+          {actionLabel}
+        </button>
       )}
     </div>
   );
