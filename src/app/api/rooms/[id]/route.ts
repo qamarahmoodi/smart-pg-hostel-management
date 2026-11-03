@@ -4,6 +4,8 @@ import { requireAdmin } from '@/lib/auth/session';
 import { logActivity } from '@/lib/logger';
 import { RowDataPacket, ResultSetHeader } from 'mysql2/promise';
 
+export const dynamic = 'force-dynamic';
+
 interface Params {
   params: { id: string };
 }

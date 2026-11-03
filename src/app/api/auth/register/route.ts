@@ -5,6 +5,8 @@ import { createSession } from '@/lib/auth/session';
 import { logActivity } from '@/lib/logger';
 import { RowDataPacket, ResultSetHeader } from 'mysql2/promise';
 
+export const dynamic = 'force-dynamic';
+
 export async function POST(request: Request) {
   try {
     const body = await request.json();
