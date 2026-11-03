@@ -48,6 +48,17 @@ Use this guide for oral examinations, project reviews, and live system demonstra
 - `allocations(room_id, status)`: Speeds up active occupant counting during procedure execution and view calculations.
 - `applications(student_id, status)`: Speeds up student dashboard status checks.
 - `users(email)`: Enforces unique email constraints and ensures instant credential lookups during login.
+- MongoDB: `{ timestamp: -1 }`, `{ action: 1 }`, `{ performedBy: 1 }`, `{ targetType: 1 }`, `{ studentId: 1 }` on `activity_logs` for audit queries and aggregation.
+
+### Q7: What happens to a room allocation if MongoDB Atlas is temporarily unreachable?
+**Answer:**
+- The room allocation will **succeed** because MySQL is our transactional source of truth.
+- We use a **post-commit logging pattern**: the MySQL transaction commits first. If MongoDB has a transient network timeout, our logging helper catches the error and logs it to server diagnostics without aborting or rolling back the student's committed room allocation.
+
+### Q8: Is your application activity logger the same as a MongoDB Trigger?
+**Answer:**
+- No. Our activity logging is an application-level audit service that records system events post-commit.
+- MongoDB Atlas Triggers are serverless functions triggered by Change Streams inside Atlas itself. We intentionally keep our logging at the application layer so it is portable, testable, and directly connected to our Next.js backend workflows.
 
 ---
 

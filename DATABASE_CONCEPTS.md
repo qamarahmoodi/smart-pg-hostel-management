@@ -150,3 +150,63 @@ Location: [`database/schema.sql`](file:///c:/Users/Qamar/Downloads/smart-pg-host
 | **ACID Guarantees** | Strict multi-table ACID transactions, row-level locks | Append-only document writes, high write throughput |
 | **Integrity** | Foreign keys, constraints, triggers, stored procedures | Schemaless embedded metadata (`details: {}`) |
 | **Query Engine** | Relational JOINs, GROUP BY, Materialized Views | Aggregation Pipelines (`$group`, `$match`, `$sort`) |
+
+---
+
+## 7. MongoDB Indexing Strategy (`activity_logs`)
+
+Location: [`src/lib/logger/index.ts`](file:///c:/Users/Qamar/Downloads/smart-pg-hostel-management/src/lib/logger/index.ts)
+
+Instead of over-indexing every field, five targeted indexes were created to match our query patterns:
+
+1. **`{ timestamp: -1 }` (`idx_activity_timestamp_desc`):**  
+   Powers reverse-chronological event feeds, time-range filters, and most-recent event queries without full collection scans.
+2. **`{ action: 1 }` (`idx_activity_action`):**  
+   Optimizes dashboard event filtering and the `$group` stage in our analytics aggregation pipeline.
+3. **`{ performedBy: 1 }` (`idx_activity_performedBy`):**  
+   Enables fast audit lookups for actions initiated by a specific administrator or student.
+4. **`{ targetType: 1 }` (`idx_activity_targetType`):**  
+   Enables indexing by entity domain (`room`, `application`, `allocation`, `user`).
+5. **`{ studentId: 1 }` (`idx_activity_studentId`):**  
+   Accelerates student-specific timeline requests.
+
+---
+
+## 8. MongoDB Aggregation Pipeline
+
+Location: Reserved for teammate in [`FRIEND_TASKS.md`](file:///c:/Users/Qamar/Downloads/smart-pg-hostel-management/FRIEND_TASKS.md) and verified in `scripts/verify-phase3.mjs`
+
+To summarize system activity into operational metrics without placing analytical load on MySQL:
+
+```javascript
+const summary = await collection.aggregate([
+  {
+    $group: {
+      _id: "$action",
+      totalEvents: { $sum: 1 },
+      lastOccurred: { $max: "$timestamp" }
+    }
+  },
+  {
+    $sort: { totalEvents: -1 }
+  }
+]).toArray();
+```
+
+### DBMS Concepts Demonstrated:
+- **`$group`:** Groups unstructured log streams by action type (equivalent to SQL `GROUP BY`).
+- **`$sum` & `$max`:** Computes aggregate event frequencies and recent timestamps.
+- **`$sort`:** Sorts results in descending order of event volume.
+
+---
+
+## 9. Dual-Database Consistency: Post-Commit Reliability
+
+In a polyglot setup without distributed 2-phase commit overhead, we follow a strict **Post-Commit Reliability Model**:
+
+1. **MySQL is the Absolute Source of Truth:**  
+   Every business state change (application approval, bed allocation, vacancy update) MUST successfully commit in MySQL before any log is written.
+2. **Non-Blocking Audit Logging:**  
+   MongoDB logging runs *after* the MySQL transaction has committed. If MongoDB is experiencing a momentary latency spike or network glitch, the failure is caught and logged to server output, but it never aborts or reverses the valid MySQL transaction.
+3. **Known Boundary / Trade-off:**  
+   If the Node.js server process crashes in the few milliseconds between the MySQL `COMMIT` and the MongoDB `insertOne()`, an audit log entry could be missed. This conscious engineering trade-off prioritizes relational data consistency over distributed lock overhead.

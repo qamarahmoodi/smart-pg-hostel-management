@@ -99,12 +99,12 @@ MYSQL_HOST="localhost"
 MYSQL_PORT=3306
 MYSQL_USER="root"
 MYSQL_PASSWORD="your_mysql_password"
-MYSQL_DATABASE="smart_pg_db"
+MYSQL_DATABASE="smart_hostel_db"
 MYSQL_CONNECTION_LIMIT=10
 
 # MongoDB Atlas (Audit Logging)
-MONGODB_URI="mongodb+srv://username:password@cluster.mongodb.net/smart_pg_logs?retryWrites=true&w=majority"
-MONGODB_DB="smart_pg_logs"
+MONGODB_URI="mongodb+srv://<username>:<password>@<cluster>.mongodb.net/hostel_management?retryWrites=true&w=majority"
+MONGODB_DB="hostel_management"
 ```
 
 ### 4. Setup MySQL Database
