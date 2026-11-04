@@ -18,7 +18,7 @@ export const dynamic = 'force-dynamic';
 
 export default async function AdminDashboardPage() {
   // 1. Fetch live aggregate metrics from MySQL
-  const [statsRows] = await query<RowDataPacket[]>(`
+  const statsRows = await query<RowDataPacket[]>(`
     SELECT 
       (SELECT COUNT(*) FROM hostels) AS total_hostels,
       (SELECT COUNT(*) FROM rooms) AS total_rooms,
@@ -28,7 +28,7 @@ export default async function AdminDashboardPage() {
       (SELECT COUNT(*) FROM applications WHERE status = 'APPROVED') AS approved_applications
   `);
 
-  const stats = statsRows[0];
+  const stats = statsRows[0] || {};
   const totalCapacity = Number(stats.total_capacity) || 0;
   const occupiedBeds = Number(stats.occupied_beds) || 0;
   const availableBeds = Math.max(0, totalCapacity - occupiedBeds);
@@ -105,8 +105,8 @@ export default async function AdminDashboardPage() {
             <span className="text-xs font-semibold uppercase tracking-wider">Properties & Rooms</span>
             <Building2 className="w-5 h-5 text-indigo-600" />
           </div>
-          <div className="text-3xl font-extrabold text-slate-900">{stats.total_hostels} Hostels</div>
-          <p className="text-xs text-slate-500 mt-1">{stats.total_rooms} physical rooms configured</p>
+          <div className="text-3xl font-extrabold text-slate-900">{stats.total_hostels || 0} Hostels</div>
+          <p className="text-xs text-slate-500 mt-1">{stats.total_rooms || 0} physical rooms configured</p>
         </div>
 
         {/* Total Bed Capacity & Occupancy */}
@@ -146,9 +146,9 @@ export default async function AdminDashboardPage() {
             <span className="text-xs font-semibold uppercase tracking-wider">Pending Applications</span>
             <ClipboardList className="w-5 h-5 text-amber-500" />
           </div>
-          <div className="text-3xl font-extrabold text-amber-600">{stats.pending_applications}</div>
+          <div className="text-3xl font-extrabold text-amber-600">{stats.pending_applications || 0}</div>
           <p className="text-xs text-slate-500 mt-1">
-            {stats.approved_applications} approved (ready for bed allocation)
+            {stats.approved_applications || 0} approved (ready for bed allocation)
           </p>
         </div>
       </div>
