@@ -3,7 +3,9 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Building2, Lock, Mail, Eye, EyeOff, ArrowRight, Shield, User } from 'lucide-react';
+import { Building2, Lock, Mail, Eye, EyeOff, ArrowRight } from 'lucide-react';
+
+export const dynamic = 'force-dynamic';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -47,17 +49,6 @@ export default function LoginPage() {
     }
   };
 
-  const fillDemoCredentials = (role: 'admin' | 'student') => {
-    if (role === 'admin') {
-      setEmail('admin@smartpg.com');
-      setPassword('Password@123');
-    } else {
-      setEmail('rohan.gupta@example.com');
-      setPassword('Password@123');
-    }
-    setError('');
-  };
-
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
@@ -78,29 +69,6 @@ export default function LoginPage() {
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 sm:px-10 shadow-sm border border-slate-200 sm:rounded-xl">
-          {/* Quick Demo Credentials Pill Bar */}
-          <div className="mb-6 p-3 bg-indigo-50/60 border border-indigo-100 rounded-lg">
-            <div className="text-xs font-semibold text-indigo-900 mb-2">⚡ Quick Viva / Demo Logins:</div>
-            <div className="flex gap-2">
-              <button
-                type="button"
-                onClick={() => fillDemoCredentials('admin')}
-                className="flex-1 inline-flex items-center justify-center gap-1.5 px-2.5 py-1.5 text-xs font-medium rounded bg-white text-indigo-700 border border-indigo-200 hover:bg-indigo-50 shadow-xs transition"
-              >
-                <Shield className="w-3.5 h-3.5 text-indigo-600" />
-                Admin (Warden)
-              </button>
-              <button
-                type="button"
-                onClick={() => fillDemoCredentials('student')}
-                className="flex-1 inline-flex items-center justify-center gap-1.5 px-2.5 py-1.5 text-xs font-medium rounded bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 shadow-xs transition"
-              >
-                <User className="w-3.5 h-3.5 text-emerald-600" />
-                Student Demo
-              </button>
-            </div>
-          </div>
-
           {error && (
             <div className="mb-4 p-3 rounded-lg bg-rose-50 border border-rose-200 text-xs text-rose-700">
               {error}

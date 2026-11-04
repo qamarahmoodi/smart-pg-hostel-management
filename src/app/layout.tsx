@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Smart PG/Hostel Management System",
-  description: "Academic DBMS Level 3 Room Allocation & Occupancy Management System",
+  description: "Smart PG & Hostel Room Allocation and Occupancy Management System",
 };
 
 export default function RootLayout({

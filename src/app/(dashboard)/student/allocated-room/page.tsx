@@ -135,9 +135,8 @@ export default function StudentAllocatedRoomPage() {
         </div>
 
         {/* Footer info */}
-        <div className="px-6 sm:px-8 py-4 bg-slate-50/50 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-2">
+        <div className="px-6 sm:px-8 py-4 bg-slate-50/50 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
           <div>Allocation ID: <code className="bg-slate-200/60 px-1.5 py-0.5 rounded text-slate-800">#{allocation.allocation_id}</code></div>
-          <div>Enforced by MySQL ACID Concurrency & stored procedure <code className="text-indigo-600">sp_allocate_room</code></div>
         </div>
       </div>
     </div>

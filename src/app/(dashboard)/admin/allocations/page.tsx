@@ -446,7 +446,7 @@ function AllocationsContent() {
       >
         <form onSubmit={handleAllocateRoom} className="space-y-4">
           <p className="text-xs text-slate-500">
-            Assigns a student to a room via stored procedure <code className="text-indigo-600 font-mono">sp_allocate_room</code>. Enforces capacity checks and pessimistic row locking to prevent over-allocation.
+            Assigns a student to a room and enforces real-time capacity checks to prevent over-allocation.
           </p>
 
           {allocError && (

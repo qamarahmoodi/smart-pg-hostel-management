@@ -92,7 +92,7 @@ export function Sidebar({ role }: SidebarProps) {
 
       {/* Footer Info */}
       <div className="pt-4 border-t border-slate-100 text-[11px] text-slate-400 px-3">
-        Smart PG & Hostel v1.0 • DBMS Level 3
+        Smart PG & Hostel v1.0
       </div>
     </aside>
   );

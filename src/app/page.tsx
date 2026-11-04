@@ -13,9 +13,6 @@ export default function Home() {
             </div>
             <div>
               <span className="font-bold text-lg text-slate-900 tracking-tight">Smart PG & Hostel</span>
-              <span className="hidden sm:inline-block ml-2 text-xs bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-full font-medium">
-                DBMS Level 3
-              </span>
             </div>
           </div>
           <div className="flex items-center gap-3">
@@ -38,7 +35,7 @@ export default function Home() {
       {/* Hero Section */}
       <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 flex flex-col items-center justify-center text-center">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200 mb-6">
-          <ShieldCheck className="w-4 h-4" /> Academic DBMS Project • Relational ACID & MongoDB Audit
+          <ShieldCheck className="w-4 h-4" /> Relational ACID Transactions &amp; Real-time Audit
         </div>
 
         <h1 className="text-4xl sm:text-6xl font-extrabold text-slate-900 tracking-tight max-w-4xl">
@@ -60,26 +57,8 @@ export default function Home() {
             href="/login"
             className="inline-flex items-center gap-2 px-6 py-3 text-base font-medium rounded-lg text-slate-700 bg-white border border-slate-300 hover:bg-slate-50 shadow-sm transition"
           >
-            Sign In / Demo Portal
+            Sign In
           </Link>
-        </div>
-
-        {/* Demo Credentials Box */}
-        <div className="mt-8 p-4 bg-slate-50 border border-slate-200 rounded-xl max-w-xl text-left text-xs text-slate-600 shadow-xs">
-          <div className="font-semibold text-slate-900 mb-2 flex items-center justify-between">
-            <span>⚡ Demonstration & Evaluator Accounts (Password: <code className="bg-slate-200 px-1 py-0.5 rounded text-indigo-700 font-mono">Password@123</code>):</span>
-            <span className="text-[10px] bg-indigo-100 text-indigo-700 font-medium px-2 py-0.5 rounded-full">Pre-Seeded</span>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            <div className="p-2.5 bg-white rounded-lg border border-slate-200">
-              <span className="font-semibold text-slate-800 block">Warden / Admin:</span>
-              <span className="font-mono text-indigo-600 select-all">admin@smartpg.com</span>
-            </div>
-            <div className="p-2.5 bg-white rounded-lg border border-slate-200">
-              <span className="font-semibold text-slate-800 block">Student Demo:</span>
-              <span className="font-mono text-emerald-600 select-all">rohan.gupta@example.com</span>
-            </div>
-          </div>
         </div>
 
         {/* Feature Cards Grid */}
@@ -119,7 +98,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="border-t bg-white py-6">
         <div className="max-w-7xl mx-auto px-4 text-center text-sm text-slate-500">
-          Smart PG/Hostel Management System • DBMS Level 3 Capstone Project
+          Smart PG/Hostel Management System • Room Allocation and Occupancy Management
         </div>
       </footer>
     </div>

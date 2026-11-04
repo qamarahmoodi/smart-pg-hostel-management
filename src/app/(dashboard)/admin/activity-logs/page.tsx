@@ -231,7 +231,7 @@ export default function ActivityLogsPage() {
             <div className="flex items-center gap-2.5">
               <Database className="w-5 h-5 text-indigo-400" />
               <h2 className="text-base font-bold text-white tracking-wide">
-                DBMS Level 3 Polyglot Architecture & Aggregation Pipeline
+                Polyglot Architecture & Aggregation Pipeline
               </h2>
             </div>
             <span className="text-xs font-mono px-2 py-0.5 rounded bg-indigo-800/60 text-indigo-200 border border-indigo-700">
@@ -482,7 +482,7 @@ export default function ActivityLogsPage() {
                     className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 shadow-sm transition disabled:opacity-50"
                   >
                     <Sparkles className="w-3.5 h-3.5" />
-                    {isSeeding ? 'Generating Sample Logs...' : 'Seed Sample Audit Records (For Demo / Viva)'}
+                    {isSeeding ? 'Generating Sample Logs...' : 'Seed Sample Audit Records'}
                   </button>
                 </div>
               )}
