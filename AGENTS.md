@@ -38,14 +38,14 @@ smart-pg-hostel-management/
 │   │   ├── (auth)/              # Auth routes (login, register)
 │   │   ├── (dashboard)/         # Protected layouts & pages
 │   │   │   ├── student/         # Student portal (browse, apply, view room)
-│   │   │   └── admin/           # Admin portal (hostels, rooms, applications, occupancy)
+│   │   │   └── admin/           # Admin portal (hostels, rooms, applications, occupancy, activity-logs)
 │   │   ├── api/                 # Next.js Route Handlers
 │   │   │   ├── auth/            # /login, /register, /logout, /me
 │   │   │   ├── hostels/         # Hostel management & browsing
 │   │   │   ├── rooms/           # Room inventory & status
 │   │   │   ├── applications/    # Application submission & review
 │   │   │   ├── allocations/     # Room allocation (stored procedure / transactions)
-│   │   │   └── logs/            # MongoDB activity log endpoint (Reserved / Read-only)
+│   │   │   └── admin/logs/      # MongoDB activity log aggregation & audit trail
 │   │   ├── layout.tsx           # Global root layout
 │   │   ├── page.tsx             # Public landing page
 │   │   └── globals.css          # Tailwind base styling
@@ -72,7 +72,7 @@ smart-pg-hostel-management/
 ├── PROJECT_SPEC.md              # Requirements and specifications
 ├── DATABASE_CONCEPTS.md         # Advanced DBMS concepts documentation
 ├── DEMO_TALKING_POINTS.md       # Viva preparation and Q&A
-├── FRIEND_TASKS.md              # Reserved task description for teammate
+├── FRIEND_TASKS.md              # Teammate contribution task & documentation
 └── README.md                    # Setup and execution guide
 ```
 
@@ -98,8 +98,8 @@ smart-pg-hostel-management/
    - Create indexes on `timestamp`, `action`, `performedBy`, and `targetType`.
 
 4. **Teammate Boundary (`FRIEND_TASKS.md`):**
-   - **Do NOT implement** the reserved task: the MongoDB Activity Log Aggregation & Admin Viewer.
-   - Provide the logging infrastructure and clear interfaces, but leave the aggregation endpoint and viewer UI for the teammate.
+   - The secondary teammate contribution task (MongoDB Activity Log Aggregation & Admin Viewer at `/admin/activity-logs` and `/api/admin/logs`) has been implemented, verified, and documented.
+   - Preserve all aggregation pipelines, route handlers, and UI analytics components.
 
 5. **UI & Code Quality:**
    - Build responsive, polished Tailwind UI with clear loading, error, and empty states.

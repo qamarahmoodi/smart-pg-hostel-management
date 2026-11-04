@@ -2,7 +2,8 @@ if (typeof window !== 'undefined') {
   throw new Error('Security Error: Database clients cannot be loaded in the browser');
 }
 
-import { MongoClient, Db, Collection, Document } from 'mongodb';
+import { MongoClient, Db, Collection } from 'mongodb';
+import type { Document } from 'mongodb';
 
 const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/hostel_management';
 const defaultDbName = process.env.MONGODB_DB || 'hostel_management';

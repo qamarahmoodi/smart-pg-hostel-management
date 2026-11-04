@@ -12,6 +12,7 @@ import {
   FilePlus,
   Shield,
   GraduationCap,
+  Activity,
 } from 'lucide-react';
 import { UserRole } from '@/types';
 
@@ -36,6 +37,7 @@ export function Sidebar({ role }: SidebarProps) {
     { label: 'Room Inventory', href: '/admin/rooms', icon: BedDouble },
     { label: 'Student Applications', href: '/admin/applications', icon: ClipboardList },
     { label: 'Room Allocations', href: '/admin/allocations', icon: KeyRound },
+    { label: 'Activity & Audit Logs', href: '/admin/activity-logs', icon: Activity },
   ];
 
   const navItems = role === 'admin' ? adminNavItems : studentNavItems;
