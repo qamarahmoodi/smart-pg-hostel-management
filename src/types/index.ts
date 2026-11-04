@@ -77,3 +77,43 @@ export interface RoomOccupancySummary {
   occupancy_status?: string;
   physical_status?: RoomStatus;
 }
+
+// MongoDB Activity Log & Aggregation Analytics Types
+export interface ActivityLogSummaryItem {
+  action: string;
+  count: number;
+  lastOccurred: string;
+}
+
+export interface ActivityDailyTrend {
+  date: string;
+  count: number;
+}
+
+export interface ActivityTargetSummary {
+  targetType: string;
+  count: number;
+}
+
+export interface SerializedActivityLog {
+  _id: string;
+  action: string;
+  performedBy: number | { userId?: number; email?: string; role?: string; name?: string };
+  targetType: string;
+  targetId: number;
+  studentId?: number;
+  roomId?: number;
+  timestamp: string;
+  details: Record<string, any>;
+}
+
+export interface ActivityLogsApiResponse {
+  success: boolean;
+  totalLogs: number;
+  summary: ActivityLogSummaryItem[];
+  dailyTrends: ActivityDailyTrend[];
+  targetSummary: ActivityTargetSummary[];
+  recentLogs: SerializedActivityLog[];
+  message?: string;
+  error?: string;
+}
