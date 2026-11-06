@@ -54,11 +54,15 @@ export async function GET(request: Request) {
     sql += ' ORDER BY hostel_name ASC, floor ASC, room_number ASC';
 
     const rooms = await query<RowDataPacket[]>(sql, params);
+    const formattedRooms = (rooms as any[]).map((r) => ({
+      ...r,
+      status: r.physical_status || r.occupancy_status || 'AVAILABLE',
+    }));
 
     return NextResponse.json({
       success: true,
-      data: rooms,
-      count: rooms.length,
+      data: formattedRooms,
+      count: formattedRooms.length,
       message: 'Rooms retrieved successfully.',
     });
   } catch (err: unknown) {

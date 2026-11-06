@@ -172,7 +172,8 @@ export default function BrowseRoomsPage() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {rooms.map((room) => {
-            const isAvailable = room.available_beds > 0 && room.status !== 'UNDER_MAINTENANCE';
+            const roomStatus = String(room.status || room.occupancy_status || room.physical_status || 'AVAILABLE');
+            const isAvailable = room.available_beds > 0 && roomStatus !== 'UNDER_MAINTENANCE' && roomStatus !== 'OCCUPIED';
 
             return (
               <div
@@ -218,7 +219,7 @@ export default function BrowseRoomsPage() {
                     </div>
                     <div className="mt-2 text-[11px] text-slate-500 flex justify-between">
                       <span>Available beds: <strong className="text-slate-800">{room.available_beds}</strong></span>
-                      <span className="capitalize">{room.status.toLowerCase().replace('_', ' ')}</span>
+                      <span className="capitalize">{(room.status || room.occupancy_status || room.physical_status || 'AVAILABLE').toLowerCase().replace(/_/g, ' ')}</span>
                     </div>
                   </div>
                 </div>

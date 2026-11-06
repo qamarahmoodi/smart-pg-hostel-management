@@ -160,7 +160,7 @@ export async function GET(request: Request) {
       rawError.includes('ENOTFOUND');
 
     const helpfulMessage = isTimeout
-      ? 'MongoDB Atlas connection timed out. Your current IP address is not whitelisted in MongoDB Atlas Network Access. In MongoDB Atlas, go to Security > Network Access and click "Add IP Address" > "Allow Access from Anywhere" (0.0.0.0/0).'
+      ? 'MongoDB Atlas connection timed out. Outbound port 27017 is blocked by your current network firewall (common on campus Wi-Fi like PESU-EC-Campus). Please switch your Wi-Fi to a mobile hotspot (Jio/Airtel) or home network to view live MongoDB logs.'
       : 'Failed to retrieve MongoDB activity logs.';
 
     return NextResponse.json(
@@ -289,7 +289,7 @@ export async function POST() {
       rawError.includes('ENOTFOUND');
 
     const helpfulMessage = isTimeout
-      ? 'MongoDB Atlas connection timed out. Your current IP address is not whitelisted in MongoDB Atlas Network Access. In MongoDB Atlas, go to Security > Network Access and click "Add IP Address" > "Allow Access from Anywhere" (0.0.0.0/0).'
+      ? 'MongoDB Atlas connection timed out. Outbound port 27017 is blocked by your current network firewall (common on campus Wi-Fi like PESU-EC-Campus). Please switch your Wi-Fi to a mobile hotspot (Jio/Airtel) or home network to view live MongoDB logs.'
       : 'Failed to seed demonstration logs into MongoDB.';
 
     return NextResponse.json(
