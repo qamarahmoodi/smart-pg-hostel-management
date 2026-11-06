@@ -152,11 +152,22 @@ export async function GET(request: Request) {
       );
     }
     console.error('[API /api/admin/logs GET Error]:', err);
+    const rawError = err instanceof Error ? err.message : String(err);
+    const isTimeout =
+      rawError.includes('timed out') ||
+      rawError.includes('Server selection') ||
+      rawError.includes('ETIMEDOUT') ||
+      rawError.includes('ENOTFOUND');
+
+    const helpfulMessage = isTimeout
+      ? 'MongoDB Atlas connection timed out. Your current IP address is not whitelisted in MongoDB Atlas Network Access. In MongoDB Atlas, go to Security > Network Access and click "Add IP Address" > "Allow Access from Anywhere" (0.0.0.0/0).'
+      : 'Failed to retrieve MongoDB activity logs.';
+
     return NextResponse.json(
       {
         success: false,
-        message: 'Failed to retrieve MongoDB activity logs.',
-        error: err instanceof Error ? err.message : String(err),
+        message: helpfulMessage,
+        error: rawError,
       },
       { status: 500 }
     );
@@ -270,11 +281,22 @@ export async function POST() {
       );
     }
     console.error('[API /api/admin/logs POST Seed Error]:', err);
+    const rawError = err instanceof Error ? err.message : String(err);
+    const isTimeout =
+      rawError.includes('timed out') ||
+      rawError.includes('Server selection') ||
+      rawError.includes('ETIMEDOUT') ||
+      rawError.includes('ENOTFOUND');
+
+    const helpfulMessage = isTimeout
+      ? 'MongoDB Atlas connection timed out. Your current IP address is not whitelisted in MongoDB Atlas Network Access. In MongoDB Atlas, go to Security > Network Access and click "Add IP Address" > "Allow Access from Anywhere" (0.0.0.0/0).'
+      : 'Failed to seed demonstration logs into MongoDB.';
+
     return NextResponse.json(
       {
         success: false,
-        message: 'Failed to seed demonstration logs into MongoDB.',
-        error: err instanceof Error ? err.message : String(err),
+        message: helpfulMessage,
+        error: rawError,
       },
       { status: 500 }
     );

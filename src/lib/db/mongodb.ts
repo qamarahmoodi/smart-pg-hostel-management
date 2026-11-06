@@ -19,24 +19,33 @@ declare global {
   var __mongoClientPromise: Promise<MongoClient> | undefined;
 }
 
-let client: MongoClient;
-let clientPromise: Promise<MongoClient>;
-
-if (process.env.NODE_ENV === 'development') {
-  if (!global.__mongoClientPromise) {
-    client = new MongoClient(uri, options);
-    global.__mongoClientPromise = client.connect();
-  }
-  clientPromise = global.__mongoClientPromise;
-} else {
-  client = new MongoClient(uri, options);
-  clientPromise = client.connect();
-}
+let clientPromise: Promise<MongoClient> | undefined;
 
 /**
  * Returns the cached MongoClient promise singleton.
+ * Automatically clears cached promise if connection fails, enabling seamless retry on next call.
  */
 export async function getMongoClient(): Promise<MongoClient> {
+  const currentUri = process.env.MONGODB_URI || uri;
+
+  if (process.env.NODE_ENV === 'development') {
+    if (!global.__mongoClientPromise) {
+      const client = new MongoClient(currentUri, options);
+      global.__mongoClientPromise = client.connect().catch((err) => {
+        global.__mongoClientPromise = undefined;
+        throw err;
+      });
+    }
+    return global.__mongoClientPromise;
+  }
+
+  if (!clientPromise) {
+    const client = new MongoClient(currentUri, options);
+    clientPromise = client.connect().catch((err) => {
+      clientPromise = undefined;
+      throw err;
+    });
+  }
   return clientPromise;
 }
 
